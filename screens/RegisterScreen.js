@@ -8,7 +8,7 @@ import { View,
          Alert
          } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
+import {getAuth} from "firebase/auth";
 import {initializeApp} from "firebase/app";
 import {getDatabase, ref, set} from "firebase/database"
 import { firebaseConfig} from "../config";

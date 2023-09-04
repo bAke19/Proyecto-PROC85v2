@@ -1,7 +1,23 @@
 import React,{Component} from "react";
-import { View, Text, StyleSheet, Image, Platform, StatusBar,SafeAreaView, FlatList, Button } from "react-native";
+import { View,
+         Text,
+         StyleSheet,
+         Image,
+         Platform, 
+         StatusBar,
+         SafeAreaView, 
+         FlatList } from "react-native";
+import {initializeApp} from "firebase/app";
+import { firebaseConfig} from "../config";
+
+const app =  initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
 
 import CardPost from "./CardPost";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Alert } from "react-native";
+
 
 //Necesito una página de creditos
 //<a href="https://www.flaticon.es/iconos-gratis/electronica" title="electrónica iconos">Electrónica iconos creados por Muhammad Ali - Flaticon</a>
@@ -20,6 +36,17 @@ export default class Feed extends Component{
         );
     }
 
+    componentDidMount(){
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            console.log(uid)
+        } else {
+            Alert.alert('Usuario Desleoguedo')
+        }
+        });
+    }
     render(){
         return(
             <View style={styles.container}>
